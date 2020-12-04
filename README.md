@@ -5,6 +5,12 @@ A simplest To-Do App build with Flask Framework
 ### Requirements
 * pip install flask
 
+### dot-env Structure
+FLASK_APP=todo.py
+FLASK_ENV=development
+SECRET_KEY = 
+MONGO_URI=
+
 ### Run Command
 * Method one :
 1. export FLASK_APP=run.py
