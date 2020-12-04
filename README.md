@@ -6,9 +6,9 @@ A simplest To-Do App build with Flask Framework
 * pip install flask
 
 ### dot-env Structure
-FLASK_APP=todo.py
-FLASK_ENV=development
-SECRET_KEY = 
+FLASK_APP=todo.py<br>
+FLASK_ENV=development<br>
+SECRET_KEY =<br>
 MONGO_URI=
 
 ### Run Command
