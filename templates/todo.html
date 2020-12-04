@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>TO-DO</title>
+</head>
+
+<body style="background-color: #e9ecef;">
+  <div class="jumbotron" style="margin-bottom: 0%;">
+    <h1 class="display-3" style="text-align: center;"><strong>To-Do List</strong></h1>
+    <p class="lead" style="text-align: center;">Organise your work...!!</p>
+    <hr class="my-4">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Add Task</h1>
+          <hr>
+          <form action="{{url_for('add_todo')}}" method="POST" autocomplete="off">
+            <div class="form-group">
+              <div class="m-4">
+                <label>Task</label>
+                <input type="text" class="form-control" id="add-list" name="add-list"
+                  placeholder="Add New Content Here ...!!">
+              </div>
+              <div class="m-4">
+                <label>Complete Till</label>
+                <input type="date" class="form-control" id="date" name="date">
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn-primary">Add to List</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="container">
+    <div class="alert alert-{{ category }} alert-dismissible m-4" role="alert" style="text-align: center;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+          aria-hidden="true">×</span></button>
+      {{message}}
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  
+  <div class="jumbotron" style="margin-bottom: 100px ;">
+    <div class="container">
+      {% if data %}
+      <h1>Your List</h1>
+      <hr>
+      <table class="table" style="text-align: center;">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Completed</th>
+          </tr>
+        </thead>
+        {% endif %}
+        {% for p in priority %}
+        <tbody>
+          {% for d in data %}
+          {% if p == d['date'] %}
+          <tr>
+            <td>{{ d['task'] }}</td>
+            <td>{{ d['date'] }}</td>
+            <td>
+              <form action="{{url_for('remove_todo')}}" method="POST" class="ml-auto mr-auto m-2" style="text-align: center;">
+                <button type="submit" class="btn btn-danger btn-sm" name="rm-list" value="{{d['_id']}}">
+                  Remove
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+        {% endfor %}
+      </table>
+      <hr>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="page-footer font-small special-color-dark">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">Made By:
+      <a href="https://github.com/Shounak-Pattewale" target="_blank"> SHOUNAK PATTEWALE</a>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
