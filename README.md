@@ -1,4 +1,4 @@
-# flask_todo
+# Flask_todo
 
 A simplest To-Do App build with Flask Framework
 
